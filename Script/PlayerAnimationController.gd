@@ -8,9 +8,8 @@ var playedAtleastOnce = false
 
 func _ready():
 	play()
-	pass
 	
-func animation_finished ():
+func animation_finished():
 	print("A")
 
 func setDesiredAnimation(_desiredAnimation):
@@ -27,4 +26,3 @@ func computeAnimationvalue(delta):
 
 func _on_AnimatedSprite_animation_finished():
 	playedAtleastOnce = true
-	pass # replace with function body

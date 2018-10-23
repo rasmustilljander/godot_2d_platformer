@@ -63,6 +63,17 @@ var isDashing = false
 
 func _ready():
 	pass
+	
+func preUpdate(delta):
+	previousHorizontalOrientation = currentHorizontalOrientation
+	previousVerticalOrientation = currentVerticalOrientation
+	previousActionOrientation = currentActionOrientation
+	accelerationPrevious = acceleration
+	acceleration = Vector2()
+	frameDelta = delta
+	jumpAction.updateState()
+	dashActionLeft.updateState()
+	dashActionRight.updateState()
 
 func computeHorizontalMovement():
 	var characterLeft = Input.is_action_pressed("character_left")
@@ -229,13 +240,7 @@ func setDesiredAnimations():
 		$AnimatedSprite.setDesiredFlipH(false)
 
 func _physics_process(delta):
-	accelerationPrevious = acceleration
-	acceleration = Vector2()
-	frameDelta = delta
-	jumpAction.updateState()
-	dashActionLeft.updateState()
-	dashActionRight.updateState()
-
+	preUpdate(delta)
 	computeHorizontalMovement()
 	computeVerticalMovement()
 	computeShoot()
@@ -243,7 +248,7 @@ func _physics_process(delta):
 	computeHorizontalFriction()
 	computeVerticalFriction()
 	clampValues()
-	#velocity = move_and_slide(velocity + acceleration, upVector) # We don't need to multiply velocity by delta because MoveAndSlide already takes delta time into account.
+	velocity = move_and_slide(velocity + acceleration, upVector) # We don't need to multiply velocity by delta because MoveAndSlide already takes delta time into account.
 
 	setDesiredAnimations()
 	$AnimatedSprite.computeAnimationvalue(delta)
