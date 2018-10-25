@@ -44,7 +44,7 @@ var dashLengthTimer = TIMER_CLASS.new()
 var dashLengthThreshold = 0.2
 var dashCounter = 0
 var dashCounterMax = 2
-var dashTouchedGroundSinceLastDash = false
+var dashTouchedGroundSinceLastDash = false # TODO This variable can probably be removed.
 
 ## Attack
 var meleeAttackForward = ACTION_CLASS.new("character_attack_forward")
@@ -166,15 +166,14 @@ func computeShoot():
 		else:
 			projectile.set_horizontal_flip(true)
 			projectile.apply_impulse(Vector2(), projectileInitialVelocity)
-		get_tree().get_root().add_child(projectile)
+		get_tree().get_root().add_child(projectile) # TODO Some better approach for getting parent for projectile
 	else:
 		actionOrientation = ActionOrientation.Nothing
 
 func computeDash():
 	dashBlockTimer.increase_timer_value(frameDelta)
 	
-	# TODO Set dash state, if dashing then dont apply gravity and dont change speed.
-	# Dash length should be variadic depending on length on downpress.
+	# TODO Dash length should be variadic depending on length on downpress.
 	if dashActionLeft.isJustPressed() && dashBlockTimer.get_value() > dashBlockTimerThreshold && dashCounter < dashCounterMax:
 		dashCounter += 1
 		isDashing = true
