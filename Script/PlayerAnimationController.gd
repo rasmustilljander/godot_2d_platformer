@@ -10,7 +10,7 @@ func _ready():
 	play()
 	
 func animation_finished():
-	print("A")
+	print("DEBUG: PlayerAnimationController")
 
 func setDesiredAnimation(_desiredAnimation):
 	desiredAnimation = _desiredAnimation
