@@ -46,6 +46,13 @@ var dashCounter = 0
 var dashCounterMax = 2
 var dashTouchedGroundSinceLastDash = false
 
+## Attack
+var meleeAttackForward = ACTION_CLASS.new("character_attack_forward")
+var meleeAttackBlockTimer = TIMER_CLASS.new()
+var meleeAttackBlockTimerThreshold = 0.1
+var meleeAttackLengthTimer = TIMER_CLASS.new()
+var meleeAttackLengthThreshold = 0.2
+
 ## Shoot
 var shootBlockTimer = TIMER_CLASS.new() # TODO Convert to use the ACTION_CLASS
 var shootBlockTimerThreshold = 0.10
