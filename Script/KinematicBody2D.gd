@@ -125,8 +125,7 @@ func want_jump():
 func can_jump():
 	jumpInitialJump = false
 
-	if (jumpTouchedGroundSinceLastJump ||
-		jumpVariadicPartTimer.get_value() < jumpVariadicPartTimerThreshold):
+	if (jumpTouchedGroundSinceLastJump || jumpVariadicPartTimer.get_value() < jumpVariadicPartTimerThreshold):
 		if jumpAction.isJustPressed() && jumpCount < jumpCountMax:
 			jumpInitialJump = true 
 			jumpVariadicPartTimer.reset()
