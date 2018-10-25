@@ -41,7 +41,7 @@ var dashActionRight = ACTION_CLASS.new("character_dash_right")
 var dashBlockTimer = TIMER_CLASS.new()
 var dashBlockTimerThreshold = 0.1
 var dashLengthTimer = TIMER_CLASS.new()
-var dashLengthThreshold = 0.3
+var dashLengthThreshold = 0.2
 var dashCounter = 0
 var dashCounterMax = 2
 var dashTouchedGroundSinceLastDash = false
@@ -81,7 +81,7 @@ func computeHorizontalMovement():
 		acceleration.x = -RUN_ACCELERATION
 	elif characterRight:
 		acceleration.x = RUN_ACCELERATION
-	
+
 	# Orientation
 	if velocity.x == 0:
 		horizontalOrientation = HorizontalOrientation.Still
@@ -96,6 +96,7 @@ func computeVerticalMovement():
 		do_jump()
 	if is_on_floor():
 		jumpCount = 0
+		dashCounter = 0
 		jumpTouchedGroundSinceLastJump = true
 		verticalOrientation = VerticalOrientation.Still
 	#if verticalOrientation == VerticalOrientation.Jumping && velocity.y > 0:
@@ -168,14 +169,16 @@ func computeDash():
 	
 	# TODO Set dash state, if dashing then dont apply gravity and dont change speed.
 	# Dash length should be variadic depending on length on downpress.
-	if dashActionLeft.isJustPressed() && dashBlockTimer.get_value() > dashBlockTimerThreshold:
+	if dashActionLeft.isJustPressed() && dashBlockTimer.get_value() > dashBlockTimerThreshold && dashCounter < dashCounterMax:
+		dashCounter += 1
 		isDashing = true
 		acceleration.x -= DASH_SPEED
 		dashBlockTimer.reset()
 		dashLengthTimer.reset()
 		velocity = Vector2()
 		return
-	elif dashActionRight.isJustPressed() && dashBlockTimer.get_value() > dashBlockTimerThreshold:
+	elif dashActionRight.isJustPressed() && dashBlockTimer.get_value() > dashBlockTimerThreshold  && dashCounter < dashCounterMax:
+		dashCounter += 1
 		isDashing = true
 		acceleration.x = DASH_SPEED
 		dashBlockTimer.reset()
@@ -184,10 +187,10 @@ func computeDash():
 		return
 
 	if dashActionLeft.isPressed() && dashLengthTimer.get_value() < dashLengthThreshold:
-	#	acceleration.x -= DASH_SPEED
+	#	acceleration.x -= DASH_SPEED * 0.1
 		dashLengthTimer.increase_timer_value(frameDelta)
 	elif dashActionRight.isPressed() && dashLengthTimer.get_value() < dashLengthThreshold:
-	#	acceleration.x += DASH_SPEED
+	#	acceleration.x += DASH_SPEED * 0.1
 		dashLengthTimer.increase_timer_value(frameDelta)
 	else:
 		isDashing = false
