@@ -65,9 +65,6 @@ func _ready():
 	pass
 	
 func preUpdate(delta):
-	previousHorizontalOrientation = currentHorizontalOrientation
-	previousVerticalOrientation = currentVerticalOrientation
-	previousActionOrientation = currentActionOrientation
 	accelerationPrevious = acceleration
 	acceleration = Vector2()
 	frameDelta = delta
