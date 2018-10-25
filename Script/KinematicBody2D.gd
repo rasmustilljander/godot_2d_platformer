@@ -47,7 +47,7 @@ var dashCounterMax = 2
 var dashTouchedGroundSinceLastDash = false
 
 ## Shoot
-var shootBlockTimer = TIMER_CLASS.new()
+var shootBlockTimer = TIMER_CLASS.new() # TODO Convert to use the ACTION_CLASS
 var shootBlockTimerThreshold = 0.10
 var projectileInitialVelocity = Vector2(-500, -50)
 
