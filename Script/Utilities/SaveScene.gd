@@ -1,5 +1,11 @@
+extends Node
 
-	# https://godotengine.org/qa/903/how-to-save-a-scene-at-run-time
-#var packed_scene = PackedScene.new()
-#packed_scene.pack(get_tree().get_current_scene())
-#ResourceSaver.save("res://my_scene.tscn", packed_scene)
+func _ready():
+	set_process_input(true)
+
+func _input(event):
+	if event.is_action_released("debug_save_scene"):
+		print("A")
+		var packed_scene = PackedScene.new()
+		packed_scene.pack(get_tree().get_current_scene())
+		ResourceSaver.save("res://Generated/1.tscn", packed_scene)

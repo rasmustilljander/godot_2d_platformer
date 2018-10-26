@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Script/MainCamera.gd" type="Script" id=1]
 [ext_resource path="res://Tileset/Test_1.tres" type="TileSet" id=2]
 [ext_resource path="res://Scene/Player_Animation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprite/Background/opengameart.org/greggman/rock.png" type="Texture" id=4]
 [ext_resource path="res://Sprite/Flat Night 4 BG.png" type="Texture" id=5]
+[ext_resource path="res://Scene/Utilities/SaveScene.tscn" type="PackedScene" id=6]
 
 [node name="Root" type="Node" index="0"]
 
@@ -70,6 +71,7 @@ position = Vector2( -52.8205, -130.353 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="3"]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -116,5 +118,7 @@ _sections_unfolded = [ "Motion", "Transform" ]
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 5 )
 _sections_unfolded = [ "Offset", "Transform", "Z Index" ]
+
+[node name="Node" parent="." index="4" instance=ExtResource( 6 )]
 
 
