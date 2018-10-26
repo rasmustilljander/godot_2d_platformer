@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Script/MainCamera.gd" type="Script" id=1]
 [ext_resource path="res://Tileset/Test_1.tres" type="TileSet" id=2]
 [ext_resource path="res://Scene/Player_Animation.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprite/Flat Night 4 BG.png" type="Texture" id=4]
+[ext_resource path="res://Sprite/Background/opengameart.org/greggman/rock.png" type="Texture" id=4]
+[ext_resource path="res://Sprite/Flat Night 4 BG.png" type="Texture" id=5]
 
 [node name="Root" type="Node" index="0"]
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
 
-position = Vector2( -62.7682, -127.123 )
+position = Vector2( -335.491, -96.3648 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -42,6 +43,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="TileMap2" type="TileMap" parent="Node2D" index="0"]
 
+position = Vector2( -270.672, 0 )
 scale = Vector2( 2, 2 )
 mode = 0
 tile_set = ExtResource( 2 )
@@ -66,12 +68,53 @@ _sections_unfolded = [ "Cell", "Transform" ]
 
 position = Vector2( -52.8205, -130.353 )
 
-[node name="Flat Night 4 BG" type="Sprite" parent="." index="3"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="3"]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+scroll_offset = Vector2( 0, 0 )
+scroll_base_offset = Vector2( 0, 0 )
+scroll_base_scale = Vector2( 1, 1 )
+scroll_limit_begin = Vector2( -500, -1 )
+scroll_limit_end = Vector2( 500, 1 )
+scroll_ignore_camera_zoom = true
+_sections_unfolded = [ "Scroll" ]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 0, 0 )
+_sections_unfolded = [ "Motion", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
+
+scale = Vector2( 1, 1.3 )
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 1500, 1500 )
+_sections_unfolded = [ "Region", "Transform", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
 
 visible = false
-position = Vector2( -52, -13 )
-z_index = -1
-texture = ExtResource( 4 )
-_sections_unfolded = [ "Transform", "Z Index" ]
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 0, 0 )
+_sections_unfolded = [ "Motion", "Transform" ]
+
+[node name="Flat Night 4 BG" type="Sprite" parent="ParallaxBackground/ParallaxLayer3" index="0"]
+
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 
 
